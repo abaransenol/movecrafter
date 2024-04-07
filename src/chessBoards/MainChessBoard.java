@@ -14,6 +14,7 @@ import otherSources.Converter;
 public class MainChessBoard extends BaseChessBoard{
     public MainChessBoard() {
         super();
+        setWhitesTurn(true);
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -25,7 +26,7 @@ public class MainChessBoard extends BaseChessBoard{
                     isWhite = false;
                 }
 
-                if ( j == 6) {
+                if (j == 6) {
                     chessPiece = new Pawn(coordinate, isWhite);
                 } else if (j == 0 || j == 7) {
                     switch (i) {
@@ -55,10 +56,6 @@ public class MainChessBoard extends BaseChessBoard{
                 this.board[i][j] = chessPiece;
             }
         }
-    }
-
-    public BaseChessPiece[][] getBoard() {
-        return board;
     }
 
     public BaseChessPiece getPiece(String coordinate){
