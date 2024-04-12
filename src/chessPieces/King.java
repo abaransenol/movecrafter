@@ -1,34 +1,19 @@
 package chessPieces;
 
+import chessBoards.ChessBoard;
+
 import java.util.ArrayList;
 
 public class King extends BaseChessPiece{
-    private boolean isMoved;
-
-    public King(int[] coordinate, boolean isWhite) {
-        super(coordinate, isWhite);
+    public King(boolean isWhite) {
+        super(isWhite);
         setName("King");
-
-        if (isWhite && coordinate[0] == 4 && coordinate[1] == 0){
-            this.isMoved = false;
-        } else if (!isWhite && coordinate[0] == 4 && coordinate[1] == 7){
-            this.isMoved = false;
-        } else {
-            this.isMoved = true;
-        }
-    }
-
-    public King(int[] coordinate, boolean isWhite, boolean isMoved) {
-        super(coordinate, isWhite);
-        setName("King");
-
-        this.isMoved = isMoved;
     }
 
     @Override
-    public ArrayList<int[]> canGo(BaseChessPiece[][] board) {
+    public ArrayList<int[]> canGo(ChessBoard chessBoard, int[] coordinates) {
         ArrayList<int[]> moves = new ArrayList<int[]>();
-        int[] currentLocation = getCoordinate();
+        BaseChessPiece[][] board = chessBoard.getBoard();
 
         try {
             for(int i=-1; i<2; i++){
@@ -36,9 +21,9 @@ public class King extends BaseChessPiece{
                     if(i == 0 && j == 0){
 
                     } else {
-                        if (currentLocation[0]+i < 8 && currentLocation[1] +j<8 && currentLocation[0]+i >-1 && currentLocation[1]+j >-1){
-                            if (board[currentLocation[0]+i][currentLocation[1] +j].isWhite() != isWhite() || board[currentLocation[0]+i][currentLocation[1] +j].getName().equals("")){
-                                int[] location = new int[]{currentLocation[0]+i,currentLocation[1] +j};
+                        if (coordinates[0]+i < 8 && coordinates[1] +j<8 && coordinates[0]+i >-1 && coordinates[1]+j >-1){
+                            if (board[coordinates[0]+i][coordinates[1] +j].isWhite() != isWhite() || board[coordinates[0]+i][coordinates[1] +j].getName().equals("")){
+                                int[] location = new int[]{coordinates[0]+i,coordinates[1] +j};
                                 moves.add(location);
                             }
                         }
@@ -55,7 +40,7 @@ public class King extends BaseChessPiece{
         for (int i=0; i<8;i++){
             for (int j=0; j<8; j++){
                 if (!board[i][j].getName().equals("") && board[i][j].isWhite() != isWhite() && !board[i][j].getName().equals("King")){
-                    for (int[] control : board[i][j].canGo(board)){
+                    for (int[] control : board[i][j].canGo(chessBoard, new int[] {i,j})){
                         int length = moves.size();
                         int k = 0;
                         while (k<length){
@@ -85,10 +70,10 @@ public class King extends BaseChessPiece{
                     if(i == 0 && j == 0){
 
                     } else if (i % 2 == 0 || j % 2 == 0){
-                        if (currentLocation[0]+i < 8 && currentLocation[1] +j<8 && currentLocation[0]+i >-1 && currentLocation[1]+j >-1){
-                            if (board[currentLocation[0]+i][currentLocation[1]+j].getName().equals("King")){
-                                kingControl[0] = currentLocation[0]+i;
-                                kingControl[1] = currentLocation[1]+j;
+                        if (coordinates[0]+i < 8 && coordinates[1] +j<8 && coordinates[0]+i >-1 && coordinates[1]+j >-1){
+                            if (board[coordinates[0]+i][coordinates[1]+j].getName().equals("King")){
+                                kingControl[0] = coordinates[0]+i;
+                                kingControl[1] = coordinates[1]+j;
                                 break;
                             }
                         }
@@ -132,9 +117,5 @@ public class King extends BaseChessPiece{
         }
         
         return moves;
-    }
-
-    public boolean isMoved() {
-        return isMoved;
     }
 }

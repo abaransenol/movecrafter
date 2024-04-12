@@ -1,24 +1,26 @@
 package chessPieces;
 
+import chessBoards.ChessBoard;
+
 import java.util.ArrayList;
 
 public class Bishop extends BaseChessPiece{
-    public Bishop(int[] coordinate, boolean isWhite) {
-        super(coordinate, isWhite);
+    public Bishop(boolean isWhite) {
+        super(isWhite);
         setName("Bishop");
     }
 
     @Override
-    public ArrayList<int[]> canGo(BaseChessPiece[][] currentBoard) {
+    public ArrayList<int[]> canGo(ChessBoard chessBoard, int[] coordinates) {
         ArrayList<int[]> moves = new ArrayList<int[]>();
-        int[] currentLocation = getCoordinate();
+        BaseChessPiece[][] currentBoard = chessBoard.getBoard();
 
         try{
             int i=1;
-            while (currentBoard[currentLocation[0]+i][currentLocation[1]+i].getName().equals("") || currentBoard[currentLocation[0]+i][currentLocation[1]+i].isWhite() != isWhite()){
-                int[] location = new int[] {currentLocation[0]+i,currentLocation[1]+i};
+            while (currentBoard[coordinates[0]+i][coordinates[1]+i].getName().equals("") || currentBoard[coordinates[0]+i][coordinates[1]+i].isWhite() != isWhite()){
+                int[] location = new int[] {coordinates[0]+i,coordinates[1]+i};
                 moves.add(location);
-                if(currentBoard[currentLocation[0]+i][currentLocation[1]+i].isWhite() != isWhite()!= isWhite() && !currentBoard[currentLocation[0]+i][currentLocation[1]+i].getName().equals("")){
+                if(currentBoard[coordinates[0]+i][coordinates[1]+i].isWhite() != isWhite() && !currentBoard[coordinates[0]+i][coordinates[1]+i].getName().equals("")){
                     break;
                 }
                 i++;
@@ -31,10 +33,10 @@ public class Bishop extends BaseChessPiece{
 
         try{
             int i=1;
-            while (currentBoard[currentLocation[0]-i][currentLocation[1]-i].getName().equals("") || currentBoard[currentLocation[0]-i][currentLocation[1]-i].isWhite() != isWhite()){
-                int[] location = new int[] {currentLocation[0]-i,currentLocation[1]-i};
+            while (currentBoard[coordinates[0]-i][coordinates[1]-i].getName().equals("") || currentBoard[coordinates[0]-i][coordinates[1]-i].isWhite() != isWhite()){
+                int[] location = new int[] {coordinates[0]-i,coordinates[1]-i};
                 moves.add(location);
-                if(currentBoard[currentLocation[0]-i][currentLocation[1]-i].isWhite() != isWhite()!= isWhite() && !currentBoard[currentLocation[0]-i][currentLocation[1]-i].getName().equals("")){
+                if(currentBoard[coordinates[0]-i][coordinates[1]-i].isWhite() != isWhite() && !currentBoard[coordinates[0]-i][coordinates[1]-i].getName().equals("")){
                     break;
                 }
                 i++;
@@ -47,10 +49,10 @@ public class Bishop extends BaseChessPiece{
 
         try{
             int i=1;
-            while (currentBoard[currentLocation[0]+i][currentLocation[1]-i].getName().equals("") || currentBoard[currentLocation[0]+i][currentLocation[1]-i].isWhite() != isWhite()){
-                int[] location = new int[] {currentLocation[0]+i,currentLocation[1]-i};
+            while (currentBoard[coordinates[0]+i][coordinates[1]-i].getName().equals("") || currentBoard[coordinates[0]+i][coordinates[1]-i].isWhite() != isWhite()){
+                int[] location = new int[] {coordinates[0]+i,coordinates[1]-i};
                 moves.add(location);
-                if(currentBoard[currentLocation[0]+i][currentLocation[1]-i].isWhite() != isWhite()!= isWhite() && !currentBoard[currentLocation[0]+i][currentLocation[1]-i].getName().equals("")){
+                if(currentBoard[coordinates[0]+i][coordinates[1]-i].isWhite() != isWhite() && !currentBoard[coordinates[0]+i][coordinates[1]-i].getName().equals("")){
                     break;
                 }
                 i++;
@@ -63,10 +65,10 @@ public class Bishop extends BaseChessPiece{
 
         try{
             int i=1;
-            while (currentBoard[currentLocation[0]-i][currentLocation[1]+i].getName().equals("") || currentBoard[currentLocation[0]-i][currentLocation[1]+i].isWhite() != isWhite()){
-                int[] location = new int[] {currentLocation[0]-i,currentLocation[1]+i};
+            while (currentBoard[coordinates[0]-i][coordinates[1]+i].getName().equals("") || currentBoard[coordinates[0]-i][coordinates[1]+i].isWhite() != isWhite()){
+                int[] location = new int[] {coordinates[0]-i,coordinates[1]+i};
                 moves.add(location);
-                if(currentBoard[currentLocation[0]-i][currentLocation[1]+i].isWhite() != isWhite()!= isWhite() && !currentBoard[currentLocation[0]-i][currentLocation[1]+i].getName().equals("")){
+                if(currentBoard[coordinates[0]-i][coordinates[1]+i].isWhite() != isWhite() && !currentBoard[coordinates[0]-i][coordinates[1]+i].getName().equals("")){
                     break;
                 }
                 i++;

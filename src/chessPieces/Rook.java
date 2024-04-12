@@ -1,41 +1,26 @@
 package chessPieces;
 
+import chessBoards.ChessBoard;
+
 import java.util.ArrayList;
 
 public class Rook extends BaseChessPiece{
-    private boolean isMoved;
-
-    public Rook(int[] coordinate, boolean isWhite) {
-        super(coordinate, isWhite);
+    public Rook(boolean isWhite) {
+        super(isWhite);
         setName("Rook");
-
-        if (isWhite && (coordinate[0] == 0 || coordinate[0] == 7) && coordinate[1] == 0){
-            this.isMoved = false;
-        } else if (!isWhite && (coordinate[0] == 0 || coordinate[0] == 7) && coordinate[1] == 7){
-            this.isMoved = false;
-        } else {
-            this.isMoved = true;
-        }
-    }
-
-    public Rook(int[] coordinate, boolean isWhite, boolean isMoved) {
-        super(coordinate, isWhite);
-        setName("Rook");
-
-        this.isMoved = isMoved;
     }
 
     @Override
-    public ArrayList<int[]> canGo(BaseChessPiece[][] currentBoard) {
+    public ArrayList<int[]> canGo(ChessBoard chessBoard, int[] coordinates) {
         ArrayList<int[]> moves = new ArrayList<int[]>();
-        int[] currentLocation = getCoordinate();
+        BaseChessPiece[][] currentBoard = chessBoard.getBoard();
 
         try{
             int i=1;
-            while (currentBoard[currentLocation[0]][currentLocation[1]+i].getName().equals("") || currentBoard[currentLocation[0]][currentLocation[1]+i].isWhite() != isWhite()){
-                int[] location = new int[] {currentLocation[0],currentLocation[1]+i};
+            while (currentBoard[coordinates[0]][coordinates[1]+i].getName().equals("") || currentBoard[coordinates[0]][coordinates[1]+i].isWhite() != isWhite()){
+                int[] location = new int[] {coordinates[0],coordinates[1]+i};
                 moves.add(location);
-                if(currentBoard[currentLocation[0]][currentLocation[1]+i].isWhite() != isWhite()!= isWhite() && !currentBoard[currentLocation[0]][currentLocation[1]+i].getName().equals("")){
+                if(currentBoard[coordinates[0]][coordinates[1]+i].isWhite() != isWhite() && !currentBoard[coordinates[0]][coordinates[1]+i].getName().equals("")){
                     break;
                 }
                 i++;
@@ -48,10 +33,10 @@ public class Rook extends BaseChessPiece{
 
         try{
             int i=1;
-            while (currentBoard[currentLocation[0]][currentLocation[1]-i].getName().equals("") || currentBoard[currentLocation[0]][currentLocation[1]-i].isWhite() != isWhite()){
-                int[] location = new int[] {currentLocation[0],currentLocation[1]-i};
+            while (currentBoard[coordinates[0]][coordinates[1]-i].getName().equals("") || currentBoard[coordinates[0]][coordinates[1]-i].isWhite() != isWhite()){
+                int[] location = new int[] {coordinates[0],coordinates[1]-i};
                 moves.add(location);
-                if(currentBoard[currentLocation[0]][currentLocation[1]-i].isWhite() != isWhite()!= isWhite() && !currentBoard[currentLocation[0]][currentLocation[1]-i].getName().equals("")){
+                if(currentBoard[coordinates[0]][coordinates[1]-i].isWhite() != isWhite() && !currentBoard[coordinates[0]][coordinates[1]-i].getName().equals("")){
                     break;
                 }
                 i++;
@@ -64,10 +49,10 @@ public class Rook extends BaseChessPiece{
 
         try{
             int i=1;
-            while (currentBoard[currentLocation[0]+i][currentLocation[1]].getName().equals("") || currentBoard[currentLocation[0]+i][currentLocation[1]].isWhite() != isWhite()){
-                int[] location = new int[] {currentLocation[0]+i,currentLocation[1]};
+            while (currentBoard[coordinates[0]+i][coordinates[1]].getName().equals("") || currentBoard[coordinates[0]+i][coordinates[1]].isWhite() != isWhite()){
+                int[] location = new int[] {coordinates[0]+i,coordinates[1]};
                 moves.add(location);
-                if(currentBoard[currentLocation[0]+i][currentLocation[1]].isWhite() != isWhite()!= isWhite() && !currentBoard[currentLocation[0]+i][currentLocation[1]].getName().equals("")){
+                if(currentBoard[coordinates[0]+i][coordinates[1]].isWhite() != isWhite() && !currentBoard[coordinates[0]+i][coordinates[1]].getName().equals("")){
                     break;
                 }
                 i++;
@@ -80,10 +65,10 @@ public class Rook extends BaseChessPiece{
 
         try{
             int i=1;
-            while (currentBoard[currentLocation[0]-i][currentLocation[1]].getName().equals("") || currentBoard[currentLocation[0]-i][currentLocation[1]].isWhite() != isWhite()){
-                int[] location = new int[] {currentLocation[0]-i,currentLocation[1]};
+            while (currentBoard[coordinates[0]-i][coordinates[1]].getName().equals("") || currentBoard[coordinates[0]-i][coordinates[1]].isWhite() != isWhite()){
+                int[] location = new int[] {coordinates[0]-i,coordinates[1]};
                 moves.add(location);
-                if(currentBoard[currentLocation[0]-i][currentLocation[1]].isWhite() != isWhite()!= isWhite() && !currentBoard[currentLocation[0]-i][currentLocation[1]].getName().equals("")){
+                if(currentBoard[coordinates[0]-i][coordinates[1]].isWhite() != isWhite() && !currentBoard[coordinates[0]-i][coordinates[1]].getName().equals("")){
                     break;
                 }
                 i++;
@@ -95,9 +80,5 @@ public class Rook extends BaseChessPiece{
         }
 
         return moves;
-    }
-
-    public boolean isMoved() {
-        return isMoved;
     }
 }

@@ -1,14 +1,14 @@
 package chessPieces;
 
+import chessBoards.ChessBoard;
+
 import java.util.ArrayList;
 
 public abstract class BaseChessPiece {
     private String name;
-    private int[] coordinate;
     private boolean isWhite;
 
-    public BaseChessPiece(int[] coordinate, boolean isWhite){
-        this.coordinate = coordinate;
+    public BaseChessPiece(boolean isWhite){
         this.isWhite = isWhite;
     }
 
@@ -20,10 +20,6 @@ public abstract class BaseChessPiece {
         this.name = name;
     }
 
-    public int[] getCoordinate() {
-        return coordinate;
-    }
-
     public boolean isWhite() {
         return isWhite;
     }
@@ -32,5 +28,5 @@ public abstract class BaseChessPiece {
 
 
 
-    public abstract ArrayList<int[]> canGo(BaseChessPiece[][] currentBoard);
+    public abstract ArrayList<int[]> canGo(ChessBoard chessBoard, int[] coordinates);
 }

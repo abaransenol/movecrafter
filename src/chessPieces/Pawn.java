@@ -1,45 +1,47 @@
 package chessPieces;
 
+import chessBoards.ChessBoard;
+
 import java.util.ArrayList;
 
 public class Pawn extends BaseChessPiece{
-    public Pawn(int[] coordinate, boolean isWhite) {
-        super(coordinate, isWhite);
+    public Pawn(boolean isWhite) {
+        super(isWhite);
         setName("Pawn");
     }
 
     @Override
-    public ArrayList<int[]> canGo(BaseChessPiece[][] board) {
+    public ArrayList<int[]> canGo(ChessBoard chessBoard, int[] coordinates) {
         ArrayList<int[]> moves = new ArrayList<int[]>();
-        int[] currentLocation = getCoordinate();
+        BaseChessPiece[][] board = chessBoard.getBoard();
         
         if (isWhite()){
-            if (board[currentLocation[0]][currentLocation[1]+1].getName().equals("")){
-                int[] location = new int[]{currentLocation[0],currentLocation[1] +1};
+            if (board[coordinates[0]][coordinates[1]+1].getName().equals("")){
+                int[] location = new int[]{coordinates[0],coordinates[1] +1};
                 moves.add(location);
             }
 
-            if (currentLocation[0]+1 < 8 && currentLocation[1] +1<8 && currentLocation[0]-1 >-1 && currentLocation[1]-1 >-1){
-                if (!board[currentLocation[0]+1][currentLocation[1]+1].getName().equals("") && board[currentLocation[0]+1][currentLocation[1]+1].isWhite() != isWhite()){
-                    int[] location = new int[]{currentLocation[0]+1,currentLocation[1] +1};
+            if (coordinates[0]+1 < 8 && coordinates[1] +1<8 && coordinates[0]-1 >-1 && coordinates[1]-1 >-1){
+                if (!board[coordinates[0]+1][coordinates[1]+1].getName().equals("") && board[coordinates[0]+1][coordinates[1]+1].isWhite() != isWhite()){
+                    int[] location = new int[]{coordinates[0]+1,coordinates[1] +1};
                     moves.add(location);
-                } else if (!board[currentLocation[0]-1][currentLocation[1]+1].getName().equals("") && board[currentLocation[0]-1][currentLocation[1]+1].isWhite() != isWhite()) {
-                    int[] location = new int[]{currentLocation[0]-1,currentLocation[1] +1};
+                } else if (!board[coordinates[0]-1][coordinates[1]+1].getName().equals("") && board[coordinates[0]-1][coordinates[1]+1].isWhite() != isWhite()) {
+                    int[] location = new int[]{coordinates[0]-1,coordinates[1] +1};
                     moves.add(location);
                 }
             }
         } else{
-            if (board[currentLocation[0]][currentLocation[1]-1].getName().equals("")){
-                int[] location = new int[]{currentLocation[0],currentLocation[1] -1};
+            if (board[coordinates[0]][coordinates[1]-1].getName().equals("")){
+                int[] location = new int[]{coordinates[0],coordinates[1] -1};
                 moves.add(location);
             }
 
-            if (currentLocation[0]+1 < 8 && currentLocation[1] +1<8 && currentLocation[0]-1 >-1 && currentLocation[1]-1 >-1){
-                if (!board[currentLocation[0]+1][currentLocation[1]-1].getName().equals("") && board[currentLocation[0]+1][currentLocation[1]-1].isWhite() != isWhite()){
-                    int[] location = new int[]{currentLocation[0]+1,currentLocation[1] -1};
+            if (coordinates[0]+1 < 8 && coordinates[1] +1<8 && coordinates[0]-1 >-1 && coordinates[1]-1 >-1){
+                if (!board[coordinates[0]+1][coordinates[1]-1].getName().equals("") && board[coordinates[0]+1][coordinates[1]-1].isWhite() != isWhite()){
+                    int[] location = new int[]{coordinates[0]+1,coordinates[1] -1};
                     moves.add(location);
-                } else if (!board[currentLocation[0]-1][currentLocation[1]-1].getName().equals("") && board[currentLocation[0]-1][currentLocation[1]-1].isWhite() != isWhite()) {
-                    int[] location = new int[]{currentLocation[0]-1,currentLocation[1] -1};
+                } else if (!board[coordinates[0]-1][coordinates[1]-1].getName().equals("") && board[coordinates[0]-1][coordinates[1]-1].isWhite() != isWhite()) {
+                    int[] location = new int[]{coordinates[0]-1,coordinates[1] -1};
                     moves.add(location);
                 }
             }

@@ -1,19 +1,74 @@
 package chessBoards;
 
-import chessPieces.*;
-import otherSources.Converter;
+import chessPieces.BaseChessPiece;
+
+public class ChessBoard {
+    private BaseChessPiece[][] board;
+    private boolean isWhitesTurn;
+    private boolean[] canCastle;
+    private int[] enPassantSquare;
+    private int halfMoveCount;
+    private int fullMoveCount;
+
+    public ChessBoard(){
+        this.setBoard(new BaseChessPiece[8][8]);
+    }
+
+
+
+
+
+    public BaseChessPiece[][] getBoard() {
+        return board;
+    }
+    public void setBoard(BaseChessPiece[][] board) {
+        this.board = board;
+    }
+
+    public boolean isWhitesTurn() {
+        return isWhitesTurn;
+    }
+    public void setWhitesTurn(boolean whitesTurn) {
+        isWhitesTurn = whitesTurn;
+    }
+
+    public boolean[] getCanCastle() {
+        return canCastle;
+    }
+    public void setCanCastle(boolean[] canCastle) {
+        this.canCastle = canCastle;
+    }
+
+    public int[] getEnPassantSquare() {
+        return enPassantSquare;
+    }
+    public void setEnPassantSquare(int[] enPassantSquare) {
+        this.enPassantSquare = enPassantSquare;
+    }
+
+    public int getHalfMoveCount() {
+        return halfMoveCount;
+    }
+    public void setHalfMoveCount(int halfMoveCount) {
+        this.halfMoveCount = halfMoveCount;
+    }
+
+    public int getFullMoveCount() {
+        return fullMoveCount;
+    }
+    public void setFullMoveCount(int fullMoveCount) {
+        this.fullMoveCount = fullMoveCount;
+    }
+}
+
 
 /*
- * i => chess boards column index.
- * j => chess boards line index.
- *
- *
- *
- * */
-
-public class MainChessBoard extends BaseChessBoard{
-    public MainChessBoard() {
-        super();
+*
+* Starting position fen code: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+*
+* --- Starting Board ---
+*
+*
         setWhitesTurn(true);
 
         for (int i = 0; i < 8; i++) {
@@ -56,27 +111,5 @@ public class MainChessBoard extends BaseChessBoard{
                 this.board[i][j] = chessPiece;
             }
         }
-    }
-
-    public BaseChessPiece getPiece(String coordinate){
-        int[] indexes = Converter.stringToIndexes(coordinate);
-
-        return board[indexes[0]][indexes[1]];
-    }
-
-    public boolean canShortCastle(King king, Rook rook){
-        if ((!king.isMoved() && !rook.isMoved() && rook.getCoordinate()[0] == 7) && (board[5][0].getName().equals("") && board[6][0].getName().equals(""))){
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean canLongCastle(King king, Rook rook){
-        if ((!king.isMoved() && !rook.isMoved() && rook.getCoordinate()[0] == 0) && (board[1][0].getName().equals("") && board[2][0].getName().equals("") && board[3][0].getName().equals(""))){
-            return true;
-        }
-
-        return false;
-    }
-}
+*
+* */
